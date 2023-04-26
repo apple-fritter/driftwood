@@ -25,7 +25,7 @@ Columns are separated by the hot beverage unicode character (☕).
 ## Example IRC log entry:
 
 ```
-#☕12☕34☕56☕Hello, world!☕
+#☕12☕34☕56☕GitHubFAN23☕Hello, world!☕
 ```
 
 ## Directory Structure:
@@ -87,10 +87,10 @@ Here's a Python example demonstrating how you could split a log entry using the 
 ```
 import re
 
-log_entry = '#☕12☕34☕56☕Hello, world!☕'
+log_entry = '#☕12☕34☕56☕GitHubFAN23☕Hello, world!☕'
 fields = re.split('☕', log_entry)
 
-Output: ['', '12', '34', '56', 'Hello, world!', '']
+Output: ['', '12', '34', '56', 'GitHubFAN23','Hello, world!', '']
 print(fields)
 ```
 
