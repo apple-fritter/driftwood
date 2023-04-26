@@ -1,30 +1,12 @@
 # IRC.log-refactor
 
-I choose to use a Unicode character like the hot beverage character (☕) as a field separator in this IRC log file format, it can help with parsing logs using regular expressions (Regex).
+I wanted a way to create a unified log format that can be used as a transitional format when porting in/out data between IRC clients, which could also serve as a way to facilitate parsing logs using regular expressions (Regex).
 
-I just happen to enjoy hot beverages and found it to my liking, for this purpose.
-
-The IRC standard does not specify a specific character as a field separator in log files. Typically, IRC logs are stored in plain text format, and the format for parsing them may vary depending on the specific implementation or tools being used.
+I choose to use a Unicode character like the hot beverage character (☕) as a field separator in this IRC log file format, as the IRC standard does not specify a specific character as a field separator in log files. Typically, IRC logs are stored in plain text format, and the format for parsing them may vary depending on the specific implementation or tools being used.
 
 By introducing a unique and uncommon Unicode character, such as the hot beverage character (☕), as the field separator, you can use it as a distinctive delimiter that is unlikely to occur naturally within the log data. This choice can help with parsing the logs using Regex patterns.
 
 When using Regex to parse the log files, match the Unicode character (☕) as the separator to split the log entries into individual fields. For example, the Regex pattern ☕ to split the log entries based on the hot beverage character.
-
-Here's a Python example demonstrating how you could split a log entry using the hot beverage character as the field separator using the `re` module:
-
-```
-import re
-
-log_entry = '#☕12☕34☕56☕Hello, world!☕'
-fields = re.split('☕', log_entry)
-
-Output: ['', '12', '34', '56', 'Hello, world!', '']
-print(fields)
-```
-
-In this example, the `re.split()` function is used with the pattern `☕` to split the log entry into fields. The resulting fields list contains the separated values, including the empty string at the beginning and end.
-
-By incorporating this unique Unicode character as a field separator, you can leverage Regex patterns to split and parse the IRC logs more effectively, because the chosen separator is not part of the IRC standard.
 
 ## IRC Log File Format:
 
@@ -87,6 +69,29 @@ Example Directory Structure:
 In this example, we have two IRC servers, `Freenode` and `EFnet`. Within the `Freenode` server, we have two channels, `#programming` and `#general`. The log files for each channel are organized by year, month, and day. For instance, the log file `01.txt` under the directory `2023/04` would contain the IRC log entries for April 1st, 2023, for the `#programming` channel on the Freenode server.
 
 You can adapt this structure and create the necessary directories and log files based on your specific server, channel, and date information to maintain an organized collection of IRC logs.
+
+## Included implementations
+In this repository, have included some basic transcribing programs, written in Rust, for the following IRC clients:
+- [IRC-Cloud](https://github.com/apple-fritter/IRC.log-refactor/tree/main/IRC-Cloud/src)
+- [MIRC](https://github.com/apple-fritter/IRC.log-refactor/tree/main/MIRC/src)
+- [WeeChat](https://github.com/apple-fritter/IRC.log-refactor/tree/main/WeeChat/src)
+- [X-Chat](https://github.com/apple-fritter/IRC.log-refactor/tree/main/XChat/src)
+- [ZNC](https://github.com/apple-fritter/IRC.log-refactor/tree/main/ZNC/src)
+
+## Applications
+Here's a Python example demonstrating how you could split a log entry using the hot beverage character as the field separator using the `re` module:
+
+```
+import re
+
+log_entry = '#☕12☕34☕56☕Hello, world!☕'
+fields = re.split('☕', log_entry)
+
+Output: ['', '12', '34', '56', 'Hello, world!', '']
+print(fields)
+```
+
+In this example, the `re.split()` function is used with the pattern `☕` to split the log entry into fields. The resulting fields list contains the separated values, including the empty string at the beginning and end.
 
 ## Considerations
 While the proposed IRC log file format using a Unicode character as a field separator can be useful, it's important to consider some potential limitations:
