@@ -22,13 +22,13 @@ Columns are separated by the hot beverage unicode character (☕).
 - The sixth column (col6) contains the message text.
 - The seventh column (col7) is left blank.
 
-## Example IRC log entry:
+#### Example IRC log entry:
 
 ```
 #☕12☕34☕56☕GitHubFAN23☕Hello, world!☕
 ```
 
-## Directory Structure:
+### Directory Structure:
 
 ```
 - Server1
@@ -49,7 +49,7 @@ Columns are separated by the hot beverage unicode character (☕).
 - Server2
   - ...
 ```
-Example Directory Structure:
+#### Example Directory Structure:
 
 ```
 - Freenode
