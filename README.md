@@ -33,15 +33,17 @@ Columns are separated by the hot beverage unicode character (☕).
 - The second column (col2) represents the hour (HH).
 - The third column (col3) represents the minutes (MM).
 - The fourth column (col4) represents the seconds (SS).
-- The fifth column (col5) contains the message text.
-- The sixth column (col6) is left blank.
+- The fifth column (col5) contains the sender.
+- The sixth column (col6) contains the message text.
+- The seventh column (col7) is left blank.
 
 ## Example IRC log entry:
 
-bash
-Copy code
+```
 #☕12☕34☕56☕Hello, world!☕
-Directory Structure:
+```
+
+## Directory Structure:
 
 ```
 - Server1
