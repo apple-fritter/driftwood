@@ -1,4 +1,4 @@
-# IRC.log-refactor
+# IRC.log
 
 I wanted a way to create a unified log format that can be used as a transitional format when porting in/out data between IRC clients, which could also serve as a way to facilitate parsing logs using regular expressions (Regex).
 
@@ -75,11 +75,11 @@ You can adapt this structure and create the necessary directories and log files 
 
 ## Included implementations
 In this repository, have included some basic transcribing programs, written in Rust, for the following IRC clients:
-- [IRC-Cloud](https://github.com/apple-fritter/IRC.log-refactor/tree/main/IRC-Cloud/src)
-- [MIRC](https://github.com/apple-fritter/IRC.log-refactor/tree/main/MIRC/src)
-- [WeeChat](https://github.com/apple-fritter/IRC.log-refactor/tree/main/WeeChat/src)
-- [X-Chat](https://github.com/apple-fritter/IRC.log-refactor/tree/main/XChat/src)
-- [ZNC](https://github.com/apple-fritter/IRC.log-refactor/tree/main/ZNC/src)
+- [IRC-Cloud](https://github.com/apple-fritter/IRC.log/tree/main/IRC-Cloud/src)
+- [MIRC](https://github.com/apple-fritter/IRC.log/tree/main/MIRC/src)
+- [WeeChat](https://github.com/apple-fritter/IRC.log/tree/main/WeeChat/src)
+- [X-Chat](https://github.com/apple-fritter/IRC.log/tree/main/XChat/src)
+- [ZNC](https://github.com/apple-fritter/IRC.log/tree/main/ZNC/src)
 
 ## Applications
 Here's a Python example demonstrating how you could split a log entry using the hot beverage character as the field separator using the `re` module:
