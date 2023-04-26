@@ -81,6 +81,9 @@ In this repository, have included some basic transcribing programs, written in R
 - [X-Chat](https://github.com/apple-fritter/IRC.log/tree/main/XChat/src)
 - [ZNC](https://github.com/apple-fritter/IRC.log/tree/main/ZNC/src)
 
+### Prerequisites
+Apart from `Rust`, and `Cargo`, you're able to get going without any external resources. I chose to make my IRC-Cloud implementation work from the assumption that the export was decompressed from the original zip format supplied by the service. Part of my philosophy of use, here, was to require fewer resources at execution time.
+
 ## Applications
 Here's a Python example demonstrating how you could split a log entry using the hot beverage character as the field separator using the `re` module:
 
