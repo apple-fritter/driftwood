@@ -71,7 +71,7 @@ Example Directory Structure:
 
 In this example, we have two IRC servers, `Freenode` and `EFnet`. Within the `Freenode` server, we have two channels, `#programming` and `#general`. The log files for each channel are organized by year, month, and day. For instance, the log file `01.txt` under the directory `2023/04` would contain the IRC log entries for April 1st, 2023, for the `#programming` channel on the Freenode server.
 
-You can adapt this structure and create the necessary directories and log files based on your specific server, channel, and date information to maintain an organized collection of IRC logs.
+You can adapt this structure and create the necessary directories and log files based on your specific server, channel, and date information to maintain an organized collection of IRC logs. You may decide on another character to separate the fields, but it is important to consider the impacts on regex parsing.
 
 ## Included implementations
 In this repository, have included some basic transcribing programs, written in Rust, for the following IRC clients:
