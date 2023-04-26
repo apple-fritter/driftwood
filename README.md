@@ -2,11 +2,14 @@
 
 I wanted a way to create a unified log format that can be used as a transitional format when porting in/out data between IRC clients, which could also serve as a way to facilitate parsing logs using regular expressions (Regex).
 
-I choose to use a Unicode character like the hot beverage character (☕) as a field separator in this IRC log file format, as the IRC standard does not specify a specific character as a field separator in log files. Typically, IRC logs are stored in plain text format, and the format for parsing them may vary depending on the specific implementation or tools being used.
+## Using UNICODE
+I choose to use a Unicode character like the hot beverage character (☕) as a field separator in this IRC log file format, as the IRC standard does not specify a specific character as a field separator in log files.
+
+Typically, IRC logs are stored in plain text format, and the format for parsing them may vary depending on the specific implementation or tools being used.
 
 By introducing a unique and uncommon Unicode character, such as the hot beverage character (☕), as the field separator, you can use it as a distinctive delimiter that is unlikely to occur naturally within the log data. This choice can help with parsing the logs using Regex patterns.
 
-When using Regex to parse the log files, match the Unicode character (☕) as the separator to split the log entries into individual fields. For example, the Regex pattern ☕ to split the log entries based on the hot beverage character.
+When using Regex to parse the log files, match the Unicode character (☕) as the separator to split the log entries into individual fields. For example, the Regex pattern `☕` to split the log entries based on the hot beverage character.
 
 ## IRC Log File Format:
 
