@@ -29,13 +29,14 @@ By incorporating this unique Unicode character as a field separator, you can lev
 ## IRC Log File Format:
 
 Columns are separated by the hot beverage unicode character (☕).
-The first column (col1) is left blank by using # as a placeholder.
-The second column (col2) represents the hour (HH).
-The third column (col3) represents the minutes (MM).
-The fourth column (col4) represents the seconds (SS).
-The fifth column (col5) contains the message text.
-The sixth column (col6) is left blank.
-Example IRC log entry:
+- The first column (col1) is left blank. By using `#`, you may ignore the line in the program of your choice.
+- The second column (col2) represents the hour (HH).
+- The third column (col3) represents the minutes (MM).
+- The fourth column (col4) represents the seconds (SS).
+- The fifth column (col5) contains the message text.
+- The sixth column (col6) is left blank.
+
+## Example IRC log entry:
 
 bash
 Copy code
