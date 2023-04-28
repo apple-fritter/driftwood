@@ -1,6 +1,13 @@
 # IRC.log
-
+## Mission statement
 I wanted a way to create a unified log format that can be used as a transitional format when porting in/out data between IRC clients, which could also serve as a way to facilitate parsing logs using regular expressions (Regex).
+
+### The shill
+- Lightning-Fast Regex Parsing
+- Elevated Readability
+- Unmatched Portability
+
+Experience the Thrill of efficient, innovative, and insightful log analysis. This refactor transforms complex IRC logs into a linguistics goldmine, providing unparalleled speed, clarity, and seamless portability across platforms. Revolutionize your log analysis with this unified format and unlock a world of possibilities for building invaluable corpora. Embrace the future of IRC log analysis now!
 
 ## Using UNICODE
 I choose to use a Unicode character like the hot beverage character (☕) as a field separator in this IRC log file format, as the IRC standard does not specify a specific character as a field separator in log files.
