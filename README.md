@@ -83,11 +83,11 @@ You can adapt this structure and create the necessary directories and log files 
 
 ## Included implementations
 In this repository, have included some basic transcribing programs, written in Rust, for the following IRC clients:
-- [IRC-Cloud](https://github.com/apple-fritter/IRC.log/tree/main/IRC-Cloud/src)
-- [MIRC](https://github.com/apple-fritter/IRC.log/tree/main/MIRC/src)
-- [WeeChat](https://github.com/apple-fritter/IRC.log/tree/main/WeeChat/src)
-- [X-Chat](https://github.com/apple-fritter/IRC.log/tree/main/XChat/src)
-- [ZNC](https://github.com/apple-fritter/IRC.log/tree/main/ZNC/src)
+- [IRC-Cloud](https://github.com/apple-fritter/IRC.log/tree/main/IRC-Cloud/)
+- [MIRC](https://github.com/apple-fritter/IRC.log/tree/main/MIRC/)
+- [WeeChat](https://github.com/apple-fritter/IRC.log/tree/main/WeeChat/)
+- [X-Chat](https://github.com/apple-fritter/IRC.log/tree/main/XChat/)
+- [ZNC](https://github.com/apple-fritter/IRC.log/tree/main/ZNC/)
 
 ### Prerequisites
 Apart from `Rust`, and `Cargo`, you're able to get going without any external resources. I chose to make my IRC-Cloud implementation work from the assumption that the export was decompressed from the original zip format supplied by the service. Part of my philosophy of use, here, was to require fewer resources at execution time.
