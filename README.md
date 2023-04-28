@@ -1,4 +1,4 @@
-# IRC.log
+# driftwood
 ## Mission statement
 Efficient, innovative, and insightful log analysis. This refactor transforms complex IRC logs into a linguistics goldmine. A unified format and a world of possibilities for building invaluable corpora.
 - Lightning-Fast Regex Parsing
@@ -83,11 +83,11 @@ You can adapt this structure and create the necessary directories and log files 
 
 ## Included implementations
 In this repository, have included some basic transcribing programs, written in Rust, for the following IRC clients:
-- [IRC-Cloud](https://github.com/apple-fritter/IRC.log/tree/main/IRC-Cloud/)
-- [MIRC](https://github.com/apple-fritter/IRC.log/tree/main/MIRC/)
-- [WeeChat](https://github.com/apple-fritter/IRC.log/tree/main/WeeChat/)
-- [X-Chat](https://github.com/apple-fritter/IRC.log/tree/main/XChat/)
-- [ZNC](https://github.com/apple-fritter/IRC.log/tree/main/ZNC/)
+- [IRC-Cloud](https://github.com/apple-fritter/driftwood/tree/main/IRC-Cloud/)
+- [mIRC](https://github.com/apple-fritter/driftwood/tree/main/mIRC/)
+- [WeeChat](https://github.com/apple-fritter/driftwood/tree/main/WeeChat/)
+- [X-Chat](https://github.com/apple-fritter/driftwood/tree/main/XChat/)
+- [ZNC](https://github.com/apple-fritter/driftwood/tree/main/ZNC/)
 
 ### Prerequisites
 Apart from `Rust`, and `Cargo`, you're able to get going without any external resources. I chose to make my IRC-Cloud implementation work from the assumption that the export was decompressed from the original zip format supplied by the service. Part of my philosophy of use, here, was to require fewer resources at execution time.
@@ -117,6 +117,9 @@ While the proposed IRC log file format using a Unicode character as a field sepa
 - File Size: The Unicode character used as a field separator could slightly increase the file size, especially if the log files contain a significant amount of data. While the impact is generally minimal, it's worth considering if storage or bandwidth constraints are a concern.
 
 - Standard Compliance: The proposed format does not adhere to any existing IRC log file standards. While this may not be a concern for this specific use case, it's essential to be aware that the format may not be universally recognized or compatible with other IRC log processing tools or systems.
+
+## Porting data back out
+I had no particular interest in creating a way to port the data back out to another client. Users of this format are welcome to fork my repository and form their own methodology. If I find it interesting, I'm open to backporting the changes!
 
 ## [Disclaimer](DISCLAIMER)
 **This software is provided "as is" and without warranty of any kind**, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.
