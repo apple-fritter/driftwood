@@ -121,6 +121,22 @@ While the proposed IRC log file format using a Unicode character as a field sepa
 ## Porting data back out
 I had no particular interest in creating a way to port the data back out to another client. Users of this format are welcome to fork my repository and form their own methodology. If I find it interesting, I'm open to backporting the changes!
 
+## Other IRC related repositories:
+
+#### WeeChat
+- [weechat.ban-evasion-detection](https://github.com/apple-fritter/weechat.ban-evasion-detection): Detect and prevent ban evasion. Python.
+- [weechat.typo-aggregator](https://github.com/apple-fritter/weechat.typo-aggregator): Records misspelled words in a TSV (tab-separated values) file. Python.
+- [weechat.whois-aggregator](https://github.com/apple-fritter/weechat.whois-aggregator): Aggregate whois data in a rolling CSV file. Python.
+- [weechat.youtube-info](https://github.com/apple-fritter/weechat.youtube-info): Extract video information from a YouTube URL and post it back to the channel. Python.
+
+#### IRCcloud
+- [irccloud-to-weechat](https://github.com/apple-fritter/irccloud-to-weechat): Convert IRC logs from the IRCcloud format to the Weechat format. Rust.
+- [irccloud-to-xchat](https://github.com/apple-fritter/irccloud-to-xchat): Convert IRC logs from the IRCcloud format to the XChat format. Rust.
+
+#### X-Chat
+- [doppelganger](https://github.com/apple-fritter/doppelganger): Masquerade X-Chat client as an out-of-the-box mIRC client. Python.
+- [xchat.channel-moderation](https://github.com/apple-fritter/xchat.channel-moderation) Moderate an IRC channel. Python.
+
 ## [Disclaimer](DISCLAIMER)
 **This software is provided "as is" and without warranty of any kind**, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.
 
