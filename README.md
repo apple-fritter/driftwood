@@ -98,9 +98,11 @@ Example implementations include:
 - [X-Chat](https://github.com/apple-fritter/driftwood/tree/main/XChat/): Enables transcribing IRC logs from the X-Chat format.
 - [ZNC](https://github.com/apple-fritter/driftwood/tree/main/ZNC/): Supports transcribing IRC logs from the ZNC format.
 
-### Prerequisites
+## Prerequisites
 
 Before using the included implementations, please ensure you have the following prerequisites:
+
+- Actual log data and/or a supported IRC client to generate it.
 
 - **Rust**: Make sure you have Rust installed on your system. You can download and install Rust from the official Rust website: [https://www.rust-lang.org](https://www.rust-lang.org).
 
