@@ -89,8 +89,9 @@ You can adapt this structure and create the necessary directories and log files 
 
 ## Included Implementations
 
-In this repository, there are included transcribing implementation examples in Rust, for the following IRC clients:
+In this repository, there are included transcribing implementation examples in Rust. Feel free to explore each implementation directory and adapt them to suit your specific needs.
 
+Example implementations include:
 - [IRC-Cloud](https://github.com/apple-fritter/driftwood/tree/main/IRC-Cloud/): Provides support for transcribing IRC logs from the IRC-Cloud format.
 - [mIRC](https://github.com/apple-fritter/driftwood/tree/main/mIRC/): Offers functionality for transcribing IRC logs from the mIRC format.
 - [WeeChat](https://github.com/apple-fritter/driftwood/tree/main/WeeChat/): Includes support for transcribing IRC logs from the WeeChat format.
@@ -107,12 +108,7 @@ Before using the included implementations, please ensure you have the following 
 
 These implementations are designed to work without any additional external resources. You should be able to get started with the implementations once you have Rust and Cargo set up on your system.
 
-Please note that the IRC-Cloud implementation assumes that the export was decompressed from the original zip format provided by the service. This approach reduces the resource requirements during execution.
-
-Feel free to explore each implementation directory and adapt them to suit your specific needs.
-
-### Prerequisites
-Apart from `Rust`, and `Cargo`, you're able to get going without any external resources. I chose to make my IRC-Cloud implementation work from the assumption that the export was decompressed from the original zip format supplied by the service. Part of my philosophy of use, here, was to require fewer resources at execution time.
+> The IRC-Cloud implementation assumes that the export was decompressed from the original zip format provided by the service. This approach reduces resource requirements at execution time.
 
 ## Applications
 
