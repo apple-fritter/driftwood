@@ -17,6 +17,8 @@ By having a common log format, it becomes easier to transfer or migrate data bet
 ### Optimize efficiency by utilizing regular expressions (Regex).
 Regular expressions are powerful pattern matching tools that can be used to extract and manipulate data. By incorporating regular expressions into the log format, you can enhance the efficiency of data processing and analysis.
 
+---
+
 ## Using UNICODE
 
 In the Driftwood format, a Unicode character is chosen for a standard field separator. The IRC standard does not specify any character for this purpose, nor does it implement any strategy to separate data present on a line entry.
@@ -41,6 +43,7 @@ Columns are separated by the hot beverage Unicode character (☕).
 #☕12☕34☕56☕GitHubFAN23☕Hello, world!☕
 ```
 
+---
 
 ## Directory Structure:
 ### Organizational method explained
@@ -87,6 +90,8 @@ In this example, we have two IRC servers, `Freenode` and `EFnet`. Within the `Fr
 
 You can adapt this structure and create the necessary directories and log files based on your specific server, channel, and date information to maintain an organized collection of IRC logs. You may decide on another character to separate the fields, but it is important to consider the impacts on regex parsing.
 
+---
+
 ## Included Implementations
 
 In this repository, there are included transcribing implementation examples in Rust. Feel free to explore each implementation directory and adapt them to suit your specific needs.
@@ -97,6 +102,8 @@ Example implementations include:
 - [WeeChat](https://github.com/apple-fritter/driftwood/tree/main/WeeChat/): Includes support for transcribing IRC logs from the WeeChat format.
 - [X-Chat](https://github.com/apple-fritter/driftwood/tree/main/XChat/): Enables transcribing IRC logs from the X-Chat format.
 - [ZNC](https://github.com/apple-fritter/driftwood/tree/main/ZNC/): Supports transcribing IRC logs from the ZNC format.
+
+---
 
 ## Prerequisites
 
@@ -111,6 +118,8 @@ Before using the included implementations, please ensure you have the following 
 These implementations are designed to work without any additional external resources. You should be able to get started with the implementations once you have Rust and Cargo set up on your system.
 
 > The IRC-Cloud implementation assumes that the export was decompressed from the original zip format provided by the service. This approach reduces resource requirements at execution time.
+
+---
 
 ## Applications
 
@@ -130,6 +139,8 @@ You can use this approach to parse and process IRC log entries in your preferred
 
 Feel free to experiment with different programming languages and regex libraries to achieve the desired parsing and analysis of the IRC logs.
 
+---
+
 ## Considerations
 While the proposed IRC log file format using a Unicode character as a field separator can be useful, it's important to consider some potential limitations:
 
@@ -141,11 +152,15 @@ While the proposed IRC log file format using a Unicode character as a field sepa
 
 - Standard Compliance: The proposed format does not adhere to any existing IRC log file standards. While this may not be a concern for this specific use case, it's essential to be aware that the format may not be universally recognized or compatible with other IRC log processing tools or systems.
 
+---
+
 ## Porting data back out
 
 While this repository does not provide a specific method to port the data back out to another IRC client, users of this format are welcome to fork the repository and develop their own methodology. If you come up with an interesting approach, I'm open to considering and backporting those changes to this repository.
 
 Feel free to explore different ways to export the IRC log data from this unified format to suit your specific requirements and integrate it into other IRC clients or tools. The flexibility of this format allows you to adapt and extend it as needed to meet your data migration or integration needs.
+
+---
 
 ## IRC Meta
 
@@ -185,10 +200,14 @@ Avoid disrupting the normal flow of conversation within IRC channels. Ensure tha
 #### Ensure Compatibility
 Consider the potential variations in behavior across different IRC platforms and clients. While aiming for compatibility, be aware that certain functionalities may not be available or consistent across all platforms. Test your project on multiple IRC platforms and clients to ensure compatibility and provide the best possible experience for users.
 
+---
+
 ## [Disclaimer](DISCLAIMER)
 **This software is provided "as is" and without warranty of any kind**, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.
 
 **The authors do not endorse or support any harmful or malicious activities** that may be carried out with the software. It is the user's responsibility to ensure that their use of the software complies with all applicable laws and regulations.
+
+---
 
 ## License
 
