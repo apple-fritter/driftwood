@@ -48,42 +48,51 @@ Columns are separated by the hot beverage Unicode character (☕).
 ## Directory Structure:
 ### Organizational method explained
 ```
-- Server1
-  - Channel1
-    - 2023
-      - 04
-        - 01.txt
-        - 02.txt
-      - 05
-        - 01.txt
-        - 02.txt
-    - 2024
-      - ...
-  - Channel2
-    - ...
-  - Query1
-    - ...
-- Server2
-  - ...
+┌─ [Server1]
+│   ├─ [Channel1]
+│   │   ├─ [2023]
+│   │   │   ├─ [04]
+│   │   │   │   ├─ 01.txt
+│   │   │   │   └─ 02.txt
+│   │   │   │
+│   │   │   └─ [05]
+│   │   │       ├─ 01.txt
+│   │   │       └─ 02.txt
+│   │   │
+│   │   └─ [2024]
+│   │       └─ ...
+│   │
+│   ├─ [Channel2]
+│   │   └─ ...
+│   │
+│   └─ [Query1]
+│       └─ ...
+│
+└─ [Server2]
+    └─ ...
 ```
 ### Example Directory Structure:
 
 ```
-- Freenode
-  - #programming
-    - 2023
-      - 04
-        - 01.txt
-        - 02.txt
-      - 05
-        - 01.txt
-        - 02.txt
-    - 2024
-      - ...
-  - #general
-    - ...
-- EFnet
-  - ...
+┌─ [Freenode]
+│   ├─ [#programming]
+│   │   ├─ [2023]
+│   │   │   ├─ [04]
+│   │   │   │   ├─ 01.txt
+│   │   │   │   └─ 02.txt
+│   │   │   │
+│   │   │   └─ [05]
+│   │   │       ├─ 01.txt
+│   │   │       └─ 02.txt
+│   │   │
+│   │   └─ [2024]
+│   │       └─ ...
+│   │
+│   └─ [#general]
+│       └─ ...
+│
+└─ [EFnet]
+       └─ ...
 ```
 
 In this example, we have two IRC servers, `Freenode` and `EFnet`. Within the `Freenode` server, we have two channels, `#programming` and `#general`. The log files for each channel are organized by year, month, and day. For instance, the log file `01.txt` under the directory `2023/04` would contain the IRC log entries for April 1st, 2023, for the `#programming` channel on the Freenode server.
