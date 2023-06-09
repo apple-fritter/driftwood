@@ -190,6 +190,7 @@ Feel free to explore different ways to export the IRC log data from this unified
 
 ### Other
 - [driftwood](https://github.com/apple-fritter/driftwood): A unified IRC log format definition. (Rust)
+- [scrimshaw](https://github.com/apple-fritter/scrimshaw): Create a quoteslist of any given user, from your driftwood formatted logs. (Rust)
 
 ### IRC usage considerations
 When working with any project involving IRC (Internet Relay Chat), it's important to keep the following considerations in mind to ensure a positive and respectful environment for all participants.
