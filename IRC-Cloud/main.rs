@@ -24,11 +24,11 @@ fn main() {
 
             // Extract the timestamp, sender nickname (if applicable), and message content
             if let Some((timestamp, sender, message)) = extract_message(&line) {
-                if line.starts_with("→ Joined channel") {
+                if line.contains("Joined channel") {
                     // Extract the channel name from the line
                     current_channel = extract_channel_name(&line);
                     is_private_message = false;
-                } else if line.starts_with('*') {
+                } else if line.starts_with("→") || line.starts_with("*") {
                     // Extract the sender nickname from the line
                     current_nick = extract_sender_nick(&line);
                     is_private_message = false;
@@ -58,9 +58,9 @@ fn extract_message(line: &str) -> Option<(String, String, String)> {
         let message = line[(timestamp_end + 2)..].to_string();
 
         // Check if the line contains a sender nickname
-        if let Some(sender_end) = message.find("> ") {
-            let sender = message[1..sender_end].to_string();
-            let message_content = message[(sender_end + 2)..].to_string();
+        if let Some(sender_end) = message.find(' ') {
+            let sender = message[..sender_end].to_string();
+            let message_content = message[(sender_end + 1)..].to_string();
             Some((timestamp, sender, message_content))
         } else {
             Some((timestamp, String::new(), message))
@@ -85,10 +85,10 @@ fn extract_sender_nick(line: &str) -> String {
 
 fn process_private_message(nick: &str, timestamp: &str, message: &str) {
     // Process private messages (e.g., save to a separate file)
-    println!("Private Message: [{}][{}]: {}", timestamp, nick, message);
+    println!("Private Message: {} \u{250} {} \u{250} {}", timestamp, nick, message);
 }
 
 fn process_channel_message(channel: &str, timestamp: &str, sender: &str, message: &str) {
     // Process channel messages (e.g., save to a separate file)
-    println!("Channel Message: [{}][{}@{}]: {}", timestamp, sender, channel, message);
+    println!("Channel Message: {} \u{250} {} \u{250} {} \u{250} {}", timestamp, channel, sender, message);
 }
