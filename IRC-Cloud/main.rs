@@ -1,97 +1,94 @@
-use std::env;
-use std::fs::{self, File, OpenOptions};
-use std::io::{BufRead, BufReader, Write};
-use std::path::{Path, PathBuf};
+use std::fs::File;
+use std::io::{BufRead, BufReader};
 
-const HOT_BEVERAGE: char = '☕';
+fn main() {
+    // Provide the path to the IRC log file
+    let log_file_path = "path/to/log_file.txt";
 
-struct IRCLogEntry {
-    ignore: bool,
-    timestamp: u64,
-    nick: String,
-    message: String,
-}
-
-fn parse_log_entry(line: &str) -> IRCLogEntry {
-    let fields: Vec<&str> = line.split('\t').collect();
-    let ignore = fields[0].trim() == "#";
-    let timestamp: u64 = fields[1].parse().unwrap();
-    let nick = String::from(fields[2]);
-    let message = String::from(fields[3]);
-
-    IRCLogEntry {
-        ignore,
-        timestamp,
-        nick,
-        message,
-    }
-}
-
-fn read_log_file(file_path: &Path) -> Vec<IRCLogEntry> {
-    let file = File::open(file_path).unwrap();
+    // Open the log file
+    let file = File::open(log_file_path).expect("Failed to open log file");
     let reader = BufReader::new(file);
 
-    reader
-        .lines()
-        .map(|line| parse_log_entry(&line.unwrap()))
-        .collect()
+    // Variables to store message details
+    let mut current_channel = String::new();
+    let mut current_nick = String::new();
+    let mut is_private_message = false;
+
+    // Iterate over each line in the log file
+    for line in reader.lines() {
+        if let Ok(line) = line {
+            // Skip the header line if it exists
+            if line.starts_with('#') || line.starts_with('<') {
+                continue;
+            }
+
+            // Extract the timestamp, sender nickname (if applicable), and message content
+            if let Some((timestamp, sender, message)) = extract_message(&line) {
+                if line.starts_with("→ Joined channel") {
+                    // Extract the channel name from the line
+                    current_channel = extract_channel_name(&line);
+                    is_private_message = false;
+                } else if line.starts_with('*') {
+                    // Extract the sender nickname from the line
+                    current_nick = extract_sender_nick(&line);
+                    is_private_message = false;
+                } else if line.starts_with('<') {
+                    // Extract the sender nickname from the line
+                    current_nick = extract_sender_nick(&line);
+                    is_private_message = true;
+                }
+
+                // Process the extracted message
+                if is_private_message {
+                    // Handle private messages
+                    process_private_message(&current_nick, &timestamp, &message);
+                } else {
+                    // Handle channel messages
+                    process_channel_message(&current_channel, &timestamp, &sender, &message);
+                }
+            }
+        }
+    }
 }
 
-fn write_log_entry(
-    log_entry: &IRCLogEntry,
-    log_date_dir: &Path,
-    log_file_path: &Path,
-) -> std::io::Result<()> {
-    if log_entry.ignore {
-        return Ok(()); // ignore rows marked with #
+fn extract_message(line: &str) -> Option<(String, String, String)> {
+    // Modify the timestamp pattern according to your actual timestamp format
+    if let Some(timestamp_end) = line.find("]") {
+        let timestamp = line[1..timestamp_end].to_string();
+        let message = line[(timestamp_end + 2)..].to_string();
+
+        // Check if the line contains a sender nickname
+        if let Some(sender_end) = message.find("> ") {
+            let sender = message[1..sender_end].to_string();
+            let message_content = message[(sender_end + 2)..].to_string();
+            Some((timestamp, sender, message_content))
+        } else {
+            Some((timestamp, String::new(), message))
+        }
+    } else {
+        None
     }
-
-    let log_line = format!(
-        "{}{}{}{}{}{}{}{}{}\n",
-        HOT_BEVERAGE,
-        log_entry.timestamp,
-        HOT_BEVERAGE,
-        log_entry.nick,
-        HOT_BEVERAGE,
-        log_entry.message,
-        HOT_BEVERAGE,
-        HOT_BEVERAGE,
-    );
-
-    let date_dir_path = log_date_dir.join(format!("{:02}", log_entry.timestamp % 100_000_000));
-    fs::create_dir_all(&date_dir_path)?;
-
-    let file = OpenOptions::new().create(true).append(true).open(log_file_path)?;
-
-    writeln!(file, "{}", log_line)?;
-
-    Ok(())
 }
 
-fn main() -> std::io::Result<()> {
-    let home_dir = env::var("HOME").unwrap_or_else(|_| String::from("."));
+fn extract_channel_name(line: &str) -> String {
+    // Extract the channel name from the line
+    let channel_start = line.find('#').unwrap_or(0);
+    let channel_end = line.find(' ').unwrap_or(line.len());
+    line[channel_start..channel_end].to_string()
+}
 
-    let irccloud_log_dir = Path::new(&home_dir).join("irccloud");
+fn extract_sender_nick(line: &str) -> String {
+    // Extract the sender nickname from the line
+    let nick_end = line.find('>').unwrap_or(line.len());
+    line[1..nick_end].to_string()
+}
 
-    let irc_log_dir = Path::new(&home_dir).join("irc-logs");
+fn process_private_message(nick: &str, timestamp: &str, message: &str) {
+    // Process private messages (e.g., save to a separate file)
+    println!("Private Message: [{}][{}]: {}", timestamp, nick, message);
+}
 
-    fs::create_dir_all(&irc_log_dir)?;
-
-    let log_file_path = irccloud_log_dir.join("log.txt");
-
-    let log_entries = read_log_file(&log_file_path);
-
-    for log_entry in log_entries {
-        let date_dir = irc_log_dir.join(format!("{:04}", log_entry.timestamp / 100000000));
-        let month_dir = date_dir.join(format!("{:02}", (log_entry.timestamp % 100000000) / 1000000));
-        let day_dir = month_dir.join(format!("{:02}", (log_entry.timestamp % 1000000) / 10000));
-
-        fs::create_dir_all(&day_dir)?;
-
-        let log_date_dir = day_dir.join(format!("{:02}", log_entry.timestamp % 10000));
-
-        write_log_entry(&log_entry, &log_date_dir, &log_file_path)?;
-    }
-
-    Ok(())
+fn process_channel_message(channel: &str, timestamp: &str, sender: &str, message: &str) {
+    // Process channel messages (e.g., save to a separate file)
+    println!("Channel Message: [{}][{}@{}]: {}", timestamp, sender, channel, message);
 }
