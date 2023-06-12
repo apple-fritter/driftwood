@@ -1,97 +1,59 @@
-use std::env;
-use std::fs::{self, File, OpenOptions};
+use std::fs;
 use std::io::{BufRead, BufReader, Write};
 use std::path::{Path, PathBuf};
 
-const HOT_BEVERAGE: char = '☕';
+fn main() {
+    // Input mIRC log file path
+    let input_path = std::env::args()
+        .nth(1)
+        .expect("Please provide the input mIRC log file as an argument.");
 
-struct IRCLogEntry {
-    ignore: bool,
-    timestamp: u64,
-    nick: String,
-    message: String,
-}
+    // Output directory
+    let output_dir = Path::new("driftwood_logs");
 
-fn parse_log_entry(line: &str) -> IRCLogEntry {
-    let fields: Vec<&str> = line.split('\t').collect();
-    let ignore = fields[0].trim() == "#";
-    let timestamp: u64 = fields[1].parse().unwrap();
-    let nick = String::from(fields[2]);
-    let message = String::from(fields[3]);
-
-    IRCLogEntry {
-        ignore,
-        timestamp,
-        nick,
-        message,
-    }
-}
-
-fn read_log_file(file_path: &Path) -> Vec<IRCLogEntry> {
-    let file = File::open(file_path).unwrap();
-    let reader = BufReader::new(file);
-
-    reader
-        .lines()
-        .map(|line| parse_log_entry(&line.unwrap()))
-        .collect()
-}
-
-fn write_log_entry(
-    log_entry: &IRCLogEntry,
-    log_date_dir: &Path,
-    log_file_path: &Path,
-) -> std::io::Result<()> {
-    if log_entry.ignore {
-        return Ok(()); // ignore rows marked with #
+    // Create the output directory if it doesn't exist
+    if !output_dir.exists() {
+        fs::create_dir_all(output_dir).expect("Failed to create the output directory.");
     }
 
-    let log_line = format!(
-        "{}{}{}{}{}{}{}{}{}\n",
-        HOT_BEVERAGE,
-        log_entry.timestamp,
-        HOT_BEVERAGE,
-        log_entry.nick,
-        HOT_BEVERAGE,
-        log_entry.message,
-        HOT_BEVERAGE,
-        HOT_BEVERAGE,
-    );
+    // Read the input mIRC log file
+    let input_file = fs::File::open(input_path).expect("Failed to open the input file.");
+    let reader = BufReader::new(input_file);
 
-    let date_dir_path = log_date_dir.join(format!("{:02}", log_entry.timestamp % 100_000_000));
-    fs::create_dir_all(&date_dir_path)?;
+    // Process each log entry
+    for line in reader.lines() {
+        if let Ok(entry) = line {
+            // Parse the mIRC log entry
+            let fields: Vec<&str> = entry.split_whitespace().collect();
+            if fields.len() >= 4 {
+                let server = fields[0];
+                let channel = ""; // Update with actual channel extraction
+                let year = ""; // Update with actual year extraction
+                let month = ""; // Update with actual month extraction
+                let day = ""; // Update with actual day extraction
+                let log_message = fields[3];
 
-    let file = OpenOptions::new().create(true).append(true).open(log_file_path)?;
+                // Construct the output file path
+                let output_path = output_dir
+                    .join(server)
+                    .join(channel)
+                    .join(year)
+                    .join(month)
+                    .join(day)
+                    .with_extension("txt");
 
-    writeln!(file, "{}", log_line)?;
+                // Create the necessary directories if they don't exist
+                if let Some(parent_dir) = output_path.parent() {
+                    fs::create_dir_all(parent_dir).expect("Failed to create the output directories.");
+                }
 
-    Ok(())
-}
-
-fn main() -> std::io::Result<()> {
-    let home_dir = env::var("HOME").unwrap_or_else(|_| String::from("."));
-
-    let mirc_log_dir = Path::new(&home_dir).join("mirc");
-
-    let irc_log_dir = Path::new(&home_dir).join("irc-logs");
-
-    fs::create_dir_all(&irc_log_dir)?;
-
-    let log_file_path = mirc_log_dir.join("logs.txt");
-
-    let log_entries = read_log_file(&log_file_path);
-
-    for log_entry in log_entries {
-        let date_dir = irc_log_dir.join(format!("{:04}", log_entry.timestamp / 100000000));
-        let month_dir = date_dir.join(format!("{:02}", (log_entry.timestamp % 100000000) / 1000000));
-        let day_dir = month_dir.join(format!("{:02}", (log_entry.timestamp % 1000000) / 10000));
-
-        fs::create_dir_all(&day_dir)?;
-
-        let log_date_dir = day_dir.join(format!("{:02}", log_entry.timestamp % 10000));
-
-        write_log_entry(&log_entry, &log_date_dir, &log_file_path)?;
+                // Write the log entry to the output file
+                let mut output_file =
+                    fs::OpenOptions::new().append(true).create(true).open(output_path)
+                        .expect("Failed to create or open the output file.");
+                writeln!(output_file, "{}☕{}☕{}☕{}☕{}☕{}☕", "", "", "", "", fields[0], log_message)
+                    .expect("Failed to write to the output file.");
+            }
+        }
     }
-
-    Ok(())
 }
