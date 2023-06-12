@@ -107,7 +107,7 @@ You can adapt this structure and create the necessary directories and log files 
 
 In this repository, there are included transcribing implementation examples in Rust. Feel free to explore each implementation directory and adapt them to suit your specific needs.
 
-Prior to the 11 June 2023 update, the example implementations were incomplete and contained erroneous code. Please report any errors you may experience by creating a pull request.
+> Prior to the 11 June 2023 update, the example implementations were incomplete and contained erroneous code. Please report any errors you may experience by creating a pull request.
 
 #### Examples include:
 - [IRC-Cloud](https://github.com/apple-fritter/driftwood/tree/main/IRC-Cloud/): Provides support for transcribing IRC logs from the IRC-Cloud format.
