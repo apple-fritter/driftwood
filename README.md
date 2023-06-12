@@ -128,9 +128,9 @@ Before using the included implementations, please ensure you have the following 
 
 - **Cargo**: Cargo is the package manager and build system for Rust. It is usually installed automatically with Rust. Ensure that Cargo is available in your system by running the command `cargo --version` in your terminal or command prompt.
 
-These implementations are designed to work without any additional external resources. You should be able to get started with the implementations once you have Rust and Cargo set up on your system.
+These majority of the included implementations are designed to work without any additional external resources. You should be able to get started with the implementations once you have Rust and Cargo set up on your system.
 
-> The IRC-Cloud implementation assumes that the export was decompressed from the original zip format provided by the service. This approach reduces resource requirements at execution time.
+> Previously,the IRC-Cloud implementation assumed that the export was decompressed from the original zip format provided by the service. This approach reduced resource requirements at execution time. Users are welcome to adapt the code to reimplement that strategy by commenting out the lines of code that handle the zipped archive.
 
 ---
 
