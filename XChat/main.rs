@@ -1,126 +1,58 @@
-use std::env;
-use std::fs::{self, File, OpenOptions};
+use std::fs;
 use std::io::{BufRead, BufReader, Write};
 use std::path::{Path, PathBuf};
 
-const HOT_BEVERAGE: char = '☕';
+fn main() {
+    // Input XChat log file path
+    let input_path = std::env::args()
+        .nth(1)
+        .expect("Please provide the input XChat log file as an argument.");
 
-struct IRCLogEntry {
-    ignore: bool,
-    hour: u32,
-    minute: u32,
-    second: u32,
-    nick: String,
-    message: String,
-}
+    // Output directory
+    let output_dir = Path::new("driftwood_logs");
 
-fn parse_log_entry(line: &str) -> IRCLogEntry {
-    let fields: Vec<&str> = line.split("\t").collect();
-    let ignore = fields[0].trim() == "#";
-    let time_parts: Vec<&str> = fields[1].split(":").collect();
-    let hour: u32 = time_parts[0].parse().unwrap();
-    let minute: u32 = time_parts[1].parse().unwrap();
-    let second: u32 = time_parts[2].parse().unwrap();
-    let nick = String::from(fields[2]);
-    let message = String::from(fields[3]);
-
-    IRCLogEntry {
-        ignore,
-        hour,
-        minute,
-        second,
-        nick,
-        message,
-    }
-}
-
-fn read_log_file(file_path: &Path) -> Vec<IRCLogEntry> {
-    let file = File::open(file_path).unwrap();
-    let reader = BufReader::new(file);
-
-    reader
-        .lines()
-        .map(|line| parse_log_entry(&line.unwrap()))
-        .collect()
-}
-
-fn write_log_entry(
-    log_entry: &IRCLogEntry,
-    log_date_dir: &Path,
-    log_file_path: &Path,
-) -> std::io::Result<()> {
-    if log_entry.ignore {
-        return Ok(()); // ignore rows marked with #
+    // Create the output directory if it doesn't exist
+    if !output_dir.exists() {
+        fs::create_dir_all(output_dir).expect("Failed to create the output directory.");
     }
 
-    let log_line = format!(
-        "{}{}{}{}{}{}{}{}{}{}\n",
-        HOT_BEVERAGE,
-        log_entry.hour,
-        HOT_BEVERAGE,
-        log_entry.minute,
-        HOT_BEVERAGE,
-        log_entry.second,
-        HOT_BEVERAGE,
-        log_entry.nick,
-        HOT_BEVERAGE,
-        log_entry.message,
-    );
+    // Read the input XChat log file
+    let input_file = fs::File::open(input_path).expect("Failed to open the input file.");
+    let reader = BufReader::new(input_file);
 
-    let date_dir_path = log_date_dir.join(log_entry.hour.to_string());
-    fs::create_dir_all(&date_dir_path)?;
+    // Process each log entry
+    for line in reader.lines() {
+        if let Ok(entry) = line {
+            let fields: Vec<&str> = entry.split("☕").collect();
+            if fields.len() >= 7 {
+                let server = fields[4];
+                let channel = ""; // Update with actual channel extraction
+                let year = ""; // Update with actual year extraction
+                let month = ""; // Update with actual month extraction
+                let day = ""; // Update with actual day extraction
+                let log_message = fields[5];
 
-    let file = OpenOptions::new().create(true).append(true).open(log_file_path)?;
+                // Construct the output file path
+                let output_path = output_dir
+                    .join(server)
+                    .join(channel)
+                    .join(year)
+                    .join(month)
+                    .join(day)
+                    .with_extension("txt");
 
-    writeln!(file, "{}", log_line)?;
-
-    Ok(())
-}
-
-fn main() -> std::io::Result<()> {
-    let home_dir = env::var("HOME").unwrap_or_else(|_| String::from("."));
-
-    let xchat_log_dir = Path::new(&home_dir).join(".xchat2").join("logs");
-
-    let irc_log_dir = Path::new(&home_dir).join("irc-logs");
-
-    fs::create_dir_all(&irc_log_dir)?;
-
-    for channel_dir in fs::read_dir(&xchat_log_dir)? {
-        let channel_dir = channel_dir?.path();
-
-        if channel_dir.is_dir() {
-            let channel_name = channel_dir.file_name().unwrap().to_string_lossy();
-
-            for log_file in fs::read_dir(&channel_dir)? {
-                let log_file_path = log_file?.path();
-                let log_file_name = log_file_path.file_name().unwrap().to_string_lossy();
-
-                if log_file_path.is_file() && log_file_name.ends_with(".log") {
-                    let date = log_file_name.trim_end_matches(".log");
-
-                    let date_parts
-                    let date_parts: Vec<&str> = date.split("-").collect();
-
-                    if date_parts.len() == 3 {
-                        let year_dir = irc_log_dir.join(date_parts[0]);
-                        let month_dir = year_dir.join(date_parts[1]);
-                        let day_dir = month_dir.join(date_parts[2]);
-
-                        fs::create_dir_all(&day_dir)?;
-
-                        let log_entries = read_log_file(&log_file_path);
-
-                        for log_entry in log_entries {
-                            let log_date_dir = day_dir.join(format!("{:02}", log_entry.hour));
-
-                            write_log_entry(&log_entry, &log_date_dir, &log_file_path)?;
-                        }
-                    }
+                // Create the necessary directories if they don't exist
+                if let Some(parent_dir) = output_path.parent() {
+                    fs::create_dir_all(parent_dir).expect("Failed to create the output directories.");
                 }
+
+                // Write the log entry to the output file
+                let mut output_file =
+                    fs::OpenOptions::new().append(true).create(true).open(output_path)
+                        .expect("Failed to create or open the output file.");
+                writeln!(output_file, "{}☕{}☕{}☕{}☕{}☕{}☕", "", fields[1], fields[2], fields[3], fields[4], log_message)
+                    .expect("Failed to write to the output file.");
             }
         }
     }
-
-    Ok(())
 }
