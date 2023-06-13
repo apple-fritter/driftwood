@@ -118,6 +118,12 @@ In this repository, there are included transcribing implementation examples in R
 
 ---
 
+## A Proof of Concept
+
+[scrimshaw](https://github.com/apple-fritter/scrimshaw) stands as the pioneering proof of concept and scraping implementation of the driftwood standard; Create a quoteslist of any given user, from your driftwood formatted logs. Written in Rust.
+
+---
+
 ## Prerequisites
 
 Before using the included implementations, please ensure you have the following prerequisites:
