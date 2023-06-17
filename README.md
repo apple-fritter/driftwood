@@ -179,18 +179,26 @@ Feel free to explore different ways to export the IRC log data from this unified
 
 ---
 
-## 🤪 IRC Meta
-### [@apple-fritter](https://github.com/apple-fritter)'s IRC Repositories:
+## <a id="irc-meta"></a>🤪 IRC Meta
+### <a id="fritterz"></a> [@apple-fritter](https://github.com/apple-fritter)'s IRC Repositories:
 
 ---
 
-#### WeeChat
-- [weechat.driftwood](https://github.com/apple-fritter/weechat.driftwood): Natively log WeeChat messages in the driftwood standard. (Python.)
-- [weechat.ban-evasion-detection](https://github.com/apple-fritter/weechat.ban-evasion-detection): Detect and prevent ban evasion. (Python)
-- [weechat.typo-aggregator](https://github.com/apple-fritter/weechat.typo-aggregator): Record misspelled words in a TSV (tab-separated values) file. (Python)
-- [weechat.whois-aggregator](https://github.com/apple-fritter/weechat.whois-aggregator): Aggregate whois data in a rolling CSV file. (Python)
-- [weechat.youtube-info](https://github.com/apple-fritter/weechat.youtube-info): Deprecated. Extract video information from a YouTube URL and post it back to the channel. (Python)
-- [weechat.youtube-api](https://github.com/apple-fritter/weechat.youtube-api): Extract video information from a YouTube URL and post it back to the channel. (Python)
+#### Driftwood Suite of IRC Analytics
+###### Driftwood utilities
+- [driftwood](https://github.com/apple-fritter/driftwood): A unified IRC log format definition. (Rust)
+- [flotsam](https://github.com/apple-fritter/flotsam): Aggregate a per-user metric of flagged contributions to any given user. (Rust)
+- [jetsam](https://github.com/apple-fritter/jetsam): Flag lines of driftwood formatted IRC logs for sanitization, moderation, or further review. (Rust)
+- [scrimshaw](https://github.com/apple-fritter/scrimshaw): Create a quoteslist of any given user, from your driftwood formatted logs. (Rust)
+
+##### Driftwood native logging plugins
+- [weechat.driftwood](https://github.com/apple-fritter/weechat.driftwood): Natively log WeeChat messages in the driftwood standard. (Python)
+
+---
+
+#### heX-Chat
+- [xchat.channel-moderation](https://github.com/apple-fritter/xchat.channel-moderation): Moderate an IRC channel. (Python)
+- [doppelganger](https://github.com/apple-fritter/doppelganger): X-Chat mIRC imposter. Fingerprint subversion. (Python bundle)
 
 ---
 
@@ -200,16 +208,13 @@ Feel free to explore different ways to export the IRC log data from this unified
 
 ---
 
-#### X-Chat
-- [xchat.channel-moderation](https://github.com/apple-fritter/xchat.channel-moderation): Moderate an IRC channel. (Python)
-- [doppelganger](https://github.com/apple-fritter/doppelganger): X-Chat mIRC imposter. Fingerprint subversion. (Python bundle)
-
----
-
-#### Other
-- [driftwood](https://github.com/apple-fritter/driftwood): A unified IRC log format definition. (Rust)
-- [jetsam](https://github.com/apple-fritter/jetsam): Flag lines of driftwood formatted IRC logs for sanitization, moderation, or further review. (Rust)
-- [scrimshaw](https://github.com/apple-fritter/scrimshaw): Create a quoteslist of any given user, from your driftwood formatted logs. (Rust)
+#### WeeChat
+- [weechat.driftwood](https://github.com/apple-fritter/weechat.driftwood): Natively log WeeChat messages in the driftwood standard. (Python)
+- [weechat.ban-evasion-detection](https://github.com/apple-fritter/weechat.ban-evasion-detection): Detect and prevent ban evasion. (Python)
+- [weechat.typo-aggregator](https://github.com/apple-fritter/weechat.typo-aggregator): Record misspelled words in a TSV (tab-separated values) file. (Python)
+- [weechat.whois-aggregator](https://github.com/apple-fritter/weechat.whois-aggregator): Aggregate whois data in a rolling CSV file. (Python)
+- [weechat.youtube-info](https://github.com/apple-fritter/weechat.youtube-info): Deprecated. Extract video information from a YouTube URL and post it back to the channel. (Python)
+- [weechat.youtube-api](https://github.com/apple-fritter/weechat.youtube-api): Extract video information from a YouTube URL and post it back to the channel. (Python)
 
 ---
 
@@ -233,6 +238,16 @@ Consider the potential variations in behavior across different IRC platforms and
 
 ---
 
+## Contributing
+Contributions are welcome! If you'd like to contribute, please follow these steps:
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push your changes to your forked repository.
+5. Submit a pull request to the main repository.
+
+---
+
 ## [Disclaimer](DISCLAIMER)
 **This software is provided "as is" and without warranty of any kind**, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.
 
@@ -241,5 +256,4 @@ Consider the potential variations in behavior across different IRC platforms and
 ---
 
 ## License
-
-These files released under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
